@@ -16,6 +16,10 @@ This is a fan project. It is not made by, affiliated with or endorsed by NTS.
 
 ![The NTS app on a TV, with both live channels and the Infinite Mixtapes](assets/screenshot.png)
 
+## Other devices
+
+[NTS for Mac](https://github.com/sanderjn/nts-mac): the same stations from the macOS menu bar, with Google Cast and AirPlay.
+
 ## Features
 
 - **Live channels 1 and 2** with the show that is on now, plus all **Infinite Mixtapes**.
@@ -88,10 +92,6 @@ Kotlin with Compose for TV. A Media3 `MediaSessionService` with one ExoPlayer pl
 | `PlaybackService.kt` | The media session, the player, retrying and the sleep timeout |
 | `MainViewModel.kt` | The list of stations and the last one played |
 | `MainActivity.kt` | The screen |
-
-## Also
-
-[NTS for Mac](https://github.com/sanderjn/nts-mac): the same stations from the macOS menu bar, with Google Cast and AirPlay.
 
 ## License
 
