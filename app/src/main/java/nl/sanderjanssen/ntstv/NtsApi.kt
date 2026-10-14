@@ -66,6 +66,7 @@ object NtsApi {
             connection.connectTimeout = 10_000
             connection.readTimeout = 10_000
             connection.setRequestProperty("Accept", "application/json")
+            connection.setRequestProperty("User-Agent", Http.USER_AGENT)
             if (connection.responseCode !in 200..299) {
                 error("HTTP ${connection.responseCode} for $url")
             }

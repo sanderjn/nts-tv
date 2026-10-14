@@ -20,7 +20,10 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaSessionService
 import kotlinx.coroutines.CancellationException
@@ -66,6 +69,11 @@ class PlaybackService : MediaSessionService() {
                 true,
             )
             .setWakeMode(C.WAKE_MODE_NETWORK)
+            .setMediaSourceFactory(
+                DefaultMediaSourceFactory(
+                    DefaultDataSource.Factory(this, DefaultHttpDataSource.Factory().setUserAgent(Http.USER_AGENT)),
+                ),
+            )
             .build()
 
         exoPlayer.addListener(object : Player.Listener {
