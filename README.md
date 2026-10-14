@@ -12,7 +12,7 @@
 
 Listen to [NTS](https://www.nts.live) on your TV: both live channels and the Infinite Mixtapes, picked with the remote. The music keeps playing when you go back to the home screen or the screensaver starts. No account, no tracking.
 
-This is a fan project. It is not made by, affiliated with or endorsed by NTS.
+This is a fan project. It is not made by, affiliated with or endorsed by NTS. If you like NTS, [support them](https://www.nts.live/supporters).
 
 ![The NTS app on a TV, with both live channels and the Infinite Mixtapes](assets/screenshot.png)
 
