@@ -6,13 +6,13 @@
   <img src="https://img.shields.io/badge/Kotlin-Compose-orange" alt="Kotlin and Compose">
 </p>
 
+This is a fan project. It is not made by, affiliated with or endorsed by NTS, and the name and the logo belong to NTS. If you like NTS, [support them](https://www.nts.live/supporters). If you work at NTS and want anything changed or taken down, [open an issue](https://github.com/sanderjn/nts-tv/issues) and I will sort it out.
+
 <p align="center">
   <a href="https://github.com/sanderjn/nts-tv/releases/latest/download/NTS-TV.apk"><b>Download NTS for Android TV</b></a>
 </p>
 
-Listen to [NTS](https://www.nts.live) on your TV: both live channels and the Infinite Mixtapes, picked with the remote. The music keeps playing when you go back to the home screen or the screensaver starts. No account, no tracking.
-
-This is a fan project. It is not made by, affiliated with or endorsed by NTS. If you like NTS, [support them](https://www.nts.live/supporters).
+Listen to [NTS](https://www.nts.live) on your TV: both live channels and the Infinite Mixtapes, picked with the remote. The music keeps playing when you go back to the home screen or the screensaver starts. No account needed.
 
 ![The NTS app on a TV, with both live channels and the Infinite Mixtapes](assets/screenshot.png)
 
@@ -57,17 +57,6 @@ adb shell pm grant nl.sanderjanssen.ntstv android.permission.WRITE_SECURE_SETTIN
 ```
 
 Without this the app works the same, but the TV goes to sleep after about twenty minutes. The app puts your own timeout back when you pause. The screensaver still starts, and switching the TV off stops the music.
-
-### Your own typeface
-
-The app looks for `regular.ttf` and `bold.ttf` in its own files folder and uses them instead of the bundled typeface when both are there:
-
-```sh
-adb push regular.ttf /sdcard/Android/data/nl.sanderjanssen.ntstv/files/fonts/regular.ttf
-adb push bold.ttf /sdcard/Android/data/nl.sanderjanssen.ntstv/files/fonts/bold.ttf
-```
-
-Open the app again to see them. They stay through updates and go when you uninstall the app.
 
 ## Building from source
 
