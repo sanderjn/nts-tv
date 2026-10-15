@@ -127,10 +127,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             val live by viewModel.live.collectAsStateWithLifecycle()
             val mixtapes by viewModel.mixtapes.collectAsStateWithLifecycle()
+            val newVersion by viewModel.newVersion.collectAsStateWithLifecycle()
             NtsScreen(
                 live = live,
                 mixtapes = mixtapes,
                 playback = playback,
+                newVersion = newVersion,
                 initialFocusId = initialFocusId,
                 onSelect = ::select,
             )
@@ -204,6 +206,7 @@ private fun NtsScreen(
     live: List<Station>,
     mixtapes: List<Station>,
     playback: PlaybackUi,
+    newVersion: String?,
     initialFocusId: String?,
     onSelect: (Station) -> Unit,
 ) {
@@ -254,7 +257,7 @@ private fun NtsScreen(
                     .background(Color.Black)
                     .padding(top = 28.dp, bottom = 12.dp),
             ) {
-                Header(nowPlaying, nowPlaying?.let(playback::statusFor))
+                Header(nowPlaying, nowPlaying?.let(playback::statusFor), newVersion)
                 Spacer(Modifier.height(20.dp))
 
                 SectionLabel("Live")
@@ -340,9 +343,11 @@ private fun rememberPivotSpec(pivot: Dp): BringIntoViewSpec {
 }
 
 @Composable
-private fun Header(nowPlaying: Station?, status: String?) {
+private fun Header(nowPlaying: Station?, status: String?, newVersion: String?) {
     Row(
-        modifier = Modifier.padding(horizontal = 48.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 48.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
@@ -350,9 +355,9 @@ private fun Header(nowPlaying: Station?, status: String?) {
             contentDescription = "NTS",
             modifier = Modifier.size(44.dp),
         )
-        if (nowPlaying != null) {
-            Spacer(Modifier.width(20.dp))
-            Column {
+        Spacer(Modifier.width(20.dp))
+        Column(Modifier.weight(1f)) {
+            if (nowPlaying != null) {
                 if (status != null) {
                     Text(status.uppercase(), color = Dim, fontSize = 14.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
                 }
@@ -363,6 +368,13 @@ private fun Header(nowPlaying: Station?, status: String?) {
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
+            }
+        }
+        if (newVersion != null) {
+            Spacer(Modifier.width(20.dp))
+            Column(horizontalAlignment = Alignment.End) {
+                Text("VERSION $newVersion AVAILABLE", fontSize = 14.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                Text(Updates.RELEASE_PAGE, color = Dim, fontSize = 14.sp)
             }
         }
     }

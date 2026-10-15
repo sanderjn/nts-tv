@@ -46,7 +46,19 @@ adb install NTS-TV.apk
 
 The TV asks once if it may trust your computer. After that NTS is in your list of apps.
 
-To update, download the new version and run `adb install -r NTS-TV.apk`.
+### Updating
+
+When a new version is out, the top of the screen says so.
+
+1. [Download NTS-TV.apk](https://github.com/sanderjn/nts-tv/releases/latest/download/NTS-TV.apk).
+2. Connect to the TV and install over the old version:
+
+```sh
+adb connect 192.168.1.50
+adb install -r NTS-TV.apk
+```
+
+The app keeps its settings. Do not uninstall the old version first: that is not needed, and the permission for keeping the TV awake would have to be granted again.
 
 ### Keeping the TV awake
 

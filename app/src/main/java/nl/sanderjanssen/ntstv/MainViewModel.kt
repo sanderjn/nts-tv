@@ -17,6 +17,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val _mixtapes = MutableStateFlow<List<Station>>(emptyList())
     val mixtapes: StateFlow<List<Station>> = _mixtapes.asStateFlow()
 
+    private val _newVersion = MutableStateFlow<String?>(null)
+    /** A newer release on GitHub, as in "1.2.0". */
+    val newVersion: StateFlow<String?> = _newVersion.asStateFlow()
+    private var lastUpdateCheck = 0L
+
     val lastPlayedId: String?
         get() = prefs.getString(KEY_LAST_PLAYED, null)
 
@@ -28,6 +33,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         attempt { _live.value = LiveStations.withShows(NtsApi.fetchLiveShows()) }
         if (_mixtapes.value.isEmpty()) {
             attempt { _mixtapes.value = NtsApi.fetchMixtapes() }
+        }
+        // Daily, as the app can stay open for days.
+        val now = System.currentTimeMillis()
+        if (now - lastUpdateCheck > 24 * 60 * 60 * 1000L) {
+            lastUpdateCheck = now
+            attempt {
+                val latest = Updates.latestVersion()
+                if (Updates.isNewer(latest, than = BuildConfig.VERSION_NAME)) _newVersion.value = latest
+            }
         }
     }
 
